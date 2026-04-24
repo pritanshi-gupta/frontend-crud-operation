@@ -1,11 +1,10 @@
-<h2>OTP Verification</h2>
+<div class="container">
+  <h2>OTP Verification</h2>
 
-<form (ngSubmit)="verifyOtp()">
+  <form (ngSubmit)="verifyOtp()">
+    <label for="otp">Enter OTP</label>
+    <input type="text" id="otp" [(ngModel)]="otp" name="otp" required />
 
-  <label>Enter OTP</label><br>
-  <input type="text" [(ngModel)]="otp" name="otp" required />
-  <br><br>
-
-  <button type="submit">Verify OTP</button>
-
-</form>
+    <button type="submit">Verify OTP</button>
+  </form>
+</div>
