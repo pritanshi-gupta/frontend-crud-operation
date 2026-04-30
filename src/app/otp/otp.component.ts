@@ -20,6 +20,7 @@ export class OtpComponent {
     private router: Router
   ) { }
 
+  // ✔ VERIFY OTP
   verifyOtp() {
 
     const data = {
@@ -48,4 +49,23 @@ export class OtpComponent {
     });
 
   }
+
+  // 🔥 NEW: RESEND OTP FUNCTION
+  resendOtp() {
+
+    const data = {
+      username: localStorage.getItem('username')
+    };
+
+    this.authService.sendOtp(data).subscribe({
+      next: () => {
+        alert("OTP Resent Successfully");
+      },
+      error: () => {
+        alert("Failed to resend OTP");
+      }
+    });
+
+  }
+
 }
