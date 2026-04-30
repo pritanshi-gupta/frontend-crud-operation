@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-otp',
@@ -13,7 +15,37 @@ export class OtpComponent {
 
   otp: string = '';
 
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
+
   verifyOtp() {
-    console.log(this.otp);
+
+    const data = {
+      username: localStorage.getItem('username'),
+      otp: this.otp
+    };
+
+    this.authService.verifyOtp(data).subscribe({
+      next: (res: any) => {
+
+        console.log("OTP Response:", res);
+
+        // ✔ save JWT token
+        localStorage.setItem('token', res.token);
+
+        alert("OTP Verified Successfully");
+
+        // ✔ go to home page
+        this.router.navigate(['/home']);
+      },
+
+      error: (err) => {
+        alert("Invalid OTP");
+        console.error(err);
+      }
+    });
+
   }
 }
