@@ -36,4 +36,20 @@ export class AuthService {
     refreshToken(): Observable<any> {
         return this.http.post(`${this.apiUrl}${API_ENDPOINTS.AUTH.REFRESH_TOKEN}`, {});
     }
+
+//  FORGOT PASSWORD
+forgotPassword(username: string): Observable<any> {
+    return this.http.post(
+        `${this.apiUrl}/auth/forgot-password?username=${username}`,
+        {}
+    );
+}
+
+//  RESET PASSWORD
+resetPassword(data: any): Observable<any> {
+    return this.http.post(
+        `${this.apiUrl}/auth/reset-password`,
+        data
+    );
+}
 }
